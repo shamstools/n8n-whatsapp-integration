@@ -1,0 +1,149 @@
+{
+  "name": "WhatsApp AI Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "60990fd9-8e68-4529-9fde-d866686c7131",
+      "name": "WhatsApp Trigger",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "whatsAppTriggerApi": {
+          "id": "REPLACE_WITH_YOUR_ID",
+          "name": "WhatsApp OAuth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.messages[0].text.body }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "fcc7f293-70d5-4905-9fd2-e6faf6c94eab",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        160,
+        208
+      ],
+      "id": "9e4a4d51-7a27-4b69-b4eb-a90a0d02ae38",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "REPLACE_WITH_YOUR_ID",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "YOUR_PHONE_NUMBER_ID",
+        "recipientPhoneNumber": "YOUR_TEST_NUMBER",
+        "textBody": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1.1,
+      "position": [
+        560,
+        0
+      ],
+      "id": "0163452f-3eef-492a-a2e2-4f2b96f3c556",
+      "name": "Send message",
+      "webhookId": "c149c265-ba78-468a-9717-54fe3e664456",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "REPLACE_WITH_YOUR_ID",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## About us:\n**Template by >>** [HoloolPro](https://www.youtube.com/@HoloolPro)\n**Contact:** shamstutos@gmail.com",
+        "height": 112,
+        "width": 384,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        128,
+        -192
+      ],
+      "typeVersion": 1,
+      "id": "05ee1fb2-2d12-4485-9380-e554228a7b43",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a1c99e2e-92f7-4c72-a162-b4adb20f0017",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8e2ff5040a981b45dc75125cefcca7b26506a8e0bfd87f4ee905ffe3ffd88856"
+  },
+  "id": "Lp3ejQwO5CYoIEAc",
+  "tags": []
+}
