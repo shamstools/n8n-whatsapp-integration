@@ -74,7 +74,7 @@
       ],
       "id": "0163452f-3eef-492a-a2e2-4f2b96f3c556",
       "name": "Send message",
-      "webhookId": "c149c265-ba78-468a-9717-54fe3e664456",
+      "webhookId": "YOUR_WEBHOOK_ID",
       "credentials": {
         "whatsAppApi": {
           "id": "REPLACE_WITH_YOUR_ID",
@@ -84,7 +84,7 @@
     },
     {
       "parameters": {
-        "content": "## About us:\n**Template by >>** [HoloolPro](https://www.youtube.com/@HoloolPro)\n**Contact:** shamstutos@gmail.com",
+        "content": "## About us:\n**Template by >>** [HoloolPro](https://www.youtube.com/@HoloolPro)\n**Contact:** holoolpro@gmail.com",
         "height": 112,
         "width": 384,
         "color": 5
